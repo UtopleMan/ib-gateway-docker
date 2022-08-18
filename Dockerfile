@@ -18,7 +18,7 @@ RUN  apt-get update \
 RUN mkdir -p /opt/TWS
 WORKDIR /opt/TWS
 RUN wget -q https://cdn.quantconnect.com/interactive/ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
-RUN chmod a+x ibgateway-latest-standalone-linux-x64.sh
+RUN chmod a+x ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
 
 # Setup  IBController
 RUN mkdir -p /opt/IBController/ && mkdir -p /opt/IBController/Logs
