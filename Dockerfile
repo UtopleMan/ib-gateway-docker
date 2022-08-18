@@ -1,6 +1,6 @@
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 
-LABEL maintainer="Mike Ehrenberg <mvberg@gmail.com>"
+LABEL maintainer="Peter Andersen"
 
 RUN  apt-get update \
   && apt-get install -y wget \
@@ -14,12 +14,6 @@ RUN  apt-get update \
   && apt-get install -y software-properties-common \
   && apt-get install -y dos2unix
 
-# Setup IB TWS
-RUN mkdir -p /opt/TWS
-WORKDIR /opt/TWS
-RUN wget -q https://cdn.quantconnect.com/interactive/ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
-RUN chmod a+x ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
-
 # Setup  IBController
 RUN mkdir -p /opt/IBController/ && mkdir -p /opt/IBController/Logs
 WORKDIR /opt/IBController/
@@ -30,7 +24,11 @@ RUN chmod -R u+x *.sh && chmod -R u+x Scripts/*.sh
 WORKDIR /
 
 # Install TWS
-RUN yes n | /opt/TWS/ibgateway-latest-standalone-linux-x64.v10.12.2d.sh -q -dir /
+RUN mkdir -p /root/ibgateway
+RUN wget https://cdn.quantconnect.com/interactive/ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
+RUN chmod 777 ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
+RUN ./ibgateway-latest-standalone-linux-x64.v10.12.2d.sh -q -dir /root/ibgateway
+RUN rm ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
 
 ENV DISPLAY :0
 
