@@ -30,7 +30,7 @@ RUN chmod -R u+x *.sh && chmod -R u+x Scripts/*.sh
 WORKDIR /
 
 # Install TWS
-RUN yes n | /opt/TWS/ibgateway-latest-standalone-linux-x64.v10.12.2d.sh
+RUN yes n | /opt/TWS/ibgateway-latest-standalone-linux-x64.v10.12.2d.sh -q -dir /
 
 ENV DISPLAY :0
 
